@@ -31,8 +31,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v2
+      with:
+        submodules: 'true'
 
     - name: Configure
       run: cmake -S . -Bbuild
