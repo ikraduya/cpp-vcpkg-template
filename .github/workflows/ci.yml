@@ -42,9 +42,15 @@ jobs:
     - name: Build with ${{ matrix.compiler }}
       run: cmake --build build
 
-    - name: Test
+    - name: Test Linux-ish
+      if: ${{ !contains(matrix.os, 'windows-latest') }}
       working-directory: build
       run: ./main
+    
+    - name: Test Windows
+      if: ${{ contains(matrix.os, 'windows-latest') }}
+      working-directory: build
+      run: ./main.exe
     
     - name: Install
       run: cmake --install build
